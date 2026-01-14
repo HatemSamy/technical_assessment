@@ -1,0 +1,39 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  email     String   @unique
+  password  String
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
+  services  Service[] @relation("ServiceCreatedBy")
+}
+
+model Service {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  status      ServiceStatus @default(ACTIVE)
+  createdAt   DateTime @default(now())
+  createdById Int
+  createdBy   User     @relation("ServiceCreatedBy", fields: [createdById], references: [id])
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+enum ServiceStatus {
+  ACTIVE
+  INACTIVE
+}
+
