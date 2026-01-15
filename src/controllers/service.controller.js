@@ -1,4 +1,4 @@
-import prisma from '../models/prismaClient.js';
+import prisma from '../database/prismaClient.js';
 import { paginate } from '../utils/pagination.js';
 import { asyncHandler } from '../utils/asyncHandler.js';
 

@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-import prisma from '../models/prismaClient.js';
+import prisma from '../database/prismaClient.js';
 import { asyncHandler } from '../utils/asyncHandler.js';
 
 export const login = asyncHandler(async (req, res) => {
